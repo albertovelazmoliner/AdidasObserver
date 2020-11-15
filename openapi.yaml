@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Swagger Adidas Observer
+  description: |
+    This is an Adidas Observer API. You can find
+    out more about Swagger at
+    [http://Swagger.io](http://Swagger.io)
+  termsOfService: http://Swagger.io/terms/
+  contact:
+    email: albertovelaz@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://Swagger.io
+servers:
+- url: https://localhost:3000/adidas-observer/1.0.0
+  description: The server description
+tags:
+- name: Adidas Observer
+  description: Observer we are in need of a specific API that will help us build a
+    new “earth investigator” feature.
+- name: image
+  description: Operation about get Earth images
+paths:
+  /image:
+    get:
+      tags:
+      - image
+      summary: Returns most recent satellite image of a geographic location
+      description: Returns an url with the most recent satellite image of a geographic
+        location from Nasa
+      operationId: getImage
+      parameters:
+      - name: addressParams
+        in: query
+        description: address params
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: api_key
+        in: query
+        description: API key authorization
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: deviceType
+        in: query
+        description: Type of device 'mobile' | 'web'
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageData'
+        "400":
+          description: Invalid parameters
+        "401":
+          description: unauthorized operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/UnauthorizedError'
+      security:
+      - APIKeyQueryParam: []
+      x-swagger-router-controller: Image
+components:
+  schemas:
+    ImageData:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+        imageDate:
+          type: string
+          format: date
+      example:
+        imageUrl: imageUrl
+        imageDate: 2000-01-23
+      xml:
+        name: ImageData
+  responses:
+    UnauthorizedError:
+      description: Api Key is missing or invalid
+  securitySchemes:
+    APIKeyQueryParam:
+      type: apiKey
+      name: api_key
+      in: query
