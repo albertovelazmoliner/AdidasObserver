@@ -11,6 +11,7 @@ chai.use(chaiHttp)
 const expect = chai.expect
 
 const image: NasaImageData = {
+  formattedAddress: 'Somewhere in time',
   imageDate: '2020-11-14T23:37:47.641Z',
   imageUrl: 'https://api.nasa.gov/planetary/earth/imary?lon=-95.33&lat=29.78&date=2018-01-01&dim=0.05'
 }
