@@ -1,13 +1,13 @@
 import bodyParser from 'body-parser'
 import express from 'express'
-import RateLimit from 'express-rate-limit'
+import rateLimit from 'express-rate-limit'
 import Helmet from 'helmet'
 
 import { APIRoute } from './routes/api'
 import { ImageRoute } from './routes/image'
 import { constants } from './utils/constants'
 
-const limiter = RateLimit({
+const limiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
   windowMs: constants.MINUTES_15
 });
