@@ -9,7 +9,7 @@ export class ImageDataController {
     public static  async getNasaImage(req: Request, res: Response, _next: NextFunction) {        
         let geocodeResult: GeocodeResponse
         let nasaImage: NasaImageData
-        let formattedAddress: String
+
         try {
             validationResult(req).throw()
             geocodeResult = await gmClient.getGeoCode(req)
