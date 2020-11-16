@@ -14,7 +14,7 @@ export class AdidasObserverAPILogger {
         ),
         level: 'info',
         transports: [
-            new transports.File({ filename: 'aggregated.log' }),
+            // new transports.File({ filename: 'aggregated.log' }),
             new transports.Console(),
         ],
     })
