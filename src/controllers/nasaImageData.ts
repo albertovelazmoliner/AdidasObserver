@@ -1,13 +1,13 @@
 import { GeocodeResponse } from '@googlemaps/google-maps-services-js'
 import { NextFunction, Request, Response } from 'express'
+import { validationResult } from 'express-validator'
 import NasaImageData from '../model/nasaImageData'
 import gmClient from '../provider/gmClient'
 import { NasaUrlComposer } from '../provider/nasaUrlComposer'
-import { validationResult } from 'express-validator'
 import { AdidasObserverAPILogger } from '../utils/logger'
 
 export class ImageDataController {    
-    public static  async getNasaImage(req: Request, res: Response, _next: NextFunction) {
+    public static  async getNasaImage(req: Request, res: Response, next: NextFunction) {
         
         AdidasObserverAPILogger.logger.info(`[GET] [/image] [start] ${JSON.stringify(req.query)}`)
         
@@ -25,9 +25,9 @@ export class ImageDataController {
             const nasaParams = {
                 date: req.query.imageDate,
                 deviceType: req.query.deviceType,
+                formattedAddress: geocodeResult.data.results[0].formatted_address,
                 lat: geocodeResult.data.results[0].geometry.location.lat,
-                lng: geocodeResult.data.results[0].geometry.location.lng,
-                formattedAddress: geocodeResult.data.results[0].formatted_address
+                lng: geocodeResult.data.results[0].geometry.location.lng
             }
 
             AdidasObserverAPILogger.logger.info(`[GET] [/image] [nasaParams] ${JSON.stringify(nasaParams)}`)
