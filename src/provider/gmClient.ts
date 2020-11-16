@@ -10,7 +10,7 @@ class GmClient {
 
     public async getGeoCode(req: Request): Promise<GeocodeResponse> {
         let geocodeResult: GeocodeResponse
-        const address = req.query.addressParameter?.toString()
+        const address = req.query.addressParams?.toString()
         try {
             geocodeResult = await this.client.geocode({
                 params: { 
