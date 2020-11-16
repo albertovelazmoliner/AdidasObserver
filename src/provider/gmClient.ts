@@ -1,5 +1,6 @@
 import { Client, GeocodeResponse } from "@googlemaps/google-maps-services-js";
 import { Request } from 'express'
+import { AdidasObserverAPILogger } from '../utils/logger'
 
 class GmClient {
     private client: Client
@@ -20,6 +21,7 @@ class GmClient {
                 timeout: 1000
             })
         } catch (err) {
+            AdidasObserverAPILogger.logger.error(`[getGeoCode] [@googlemaps/google-maps-services-js] ${JSON.stringify(err)}`)
             throw new err
         }
         

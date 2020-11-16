@@ -1,7 +1,10 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import rateLimit from 'express-rate-limit'
+import expressWinston from 'express-winston'
 import Helmet from 'helmet'
+import winston from 'winston'
+
 
 import { APIRoute } from './routes/api'
 import { ImageRoute } from './routes/image'
@@ -15,15 +18,20 @@ const limiter = rateLimit({
 class App {
   public app: express.Application
   public apiRoutes: APIRoute = new APIRoute()
-  public imageRoutes: ImageRoute = new ImageRoute()  
+  public imageRoutes: ImageRoute = new ImageRoute()
 
   constructor() {
-    this.app = express() 
+    this.app = express()
     this.app.use(bodyParser.json())
     this.app.use(Helmet())
     this.app.use(limiter)
     this.imageRoutes.routes(this.app)
     this.apiRoutes.routes(this.app)
+    this.app.use(
+      expressWinston.errorLogger({
+        transports: [new winston.transports.Console()]
+      })
+    )
   }
 }
 
