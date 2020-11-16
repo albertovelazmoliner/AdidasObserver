@@ -5,6 +5,4 @@ logs/
 data
 private/
 .env
-key.pem
-keytemp.pem
-cert.pem
+src/config/
