@@ -84,7 +84,6 @@ paths:
                 $ref: '#/components/responses/UnauthorizedError'
       security:
       - APIKeyQueryParam: []
-      x-swagger-router-controller: Image
 components:
   schemas:
     ImageData:
@@ -98,6 +97,7 @@ components:
       example:
         imageUrl: imageUrl
         imageDate: 2000-01-23
+        formattedAddress: 'Somewhere in time, 2'
       xml:
         name: ImageData
   responses:
