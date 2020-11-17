@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import express from 'express'
 import rateLimit from 'express-rate-limit'
 import expressWinston from 'express-winston'
@@ -25,6 +26,7 @@ class App {
     this.app.use(bodyParser.json())
     this.app.use(Helmet())
     this.app.use(limiter)
+    this.app.use(cors())
     this.imageRoutes.routes(this.app)
     this.apiRoutes.routes(this.app)
     this.app.use(
