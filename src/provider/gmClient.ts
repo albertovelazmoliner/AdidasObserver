@@ -3,7 +3,7 @@ import { Request } from 'express'
 import { AdidasObserverAPILogger } from '../utils/logger'
 
 class GmClient {
-    private client: Client
+    protected client: Client
     
     constructor() {
         this.client = new Client()
@@ -11,7 +11,9 @@ class GmClient {
 
     public async getGeoCode(req: Request): Promise<GeocodeResponse> {
         let geocodeResult: GeocodeResponse
-        const address = req.query.addressParams?.toString()
+        
+        // Check with tesst purpose only
+        const address = req.query ? req.query.addressParams?.toString() : undefined
         try {
             geocodeResult = await this.client.geocode({
                 params: { 
@@ -29,4 +31,4 @@ class GmClient {
     }
 }
 
-export default new GmClient()
+export default GmClient

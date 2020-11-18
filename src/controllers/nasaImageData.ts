@@ -2,7 +2,7 @@ import { GeocodeResponse } from '@googlemaps/google-maps-services-js'
 import { NextFunction, Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import NasaImageData from '../model/nasaImageData'
-import gmClient from '../provider/gmClient'
+import GmClient from '../provider/gmClient'
 import { NasaUrlComposer } from '../provider/nasaUrlComposer'
 import { AdidasObserverAPILogger } from '../utils/logger'
 
@@ -16,8 +16,8 @@ export class ImageDataController {
 
         try {
             validationResult(req).throw()
+            const gmClient = new GmClient()
             geocodeResult = await gmClient.getGeoCode(req)
-
             if (!geocodeResult.data.results[0]) {
                 throw new Error('No geocode result found for the given params')
             }
