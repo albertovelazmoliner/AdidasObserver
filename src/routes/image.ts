@@ -3,8 +3,7 @@ import { query } from 'express-validator'
 import { ImageDataController } from '../controllers/nasaImageData'
 
 export class ImageRoute {
-  public routes(app: Application): void {
-    // app.route('/image').get(ImageDataController.getNasaImage)
+  public routes(app: Application): void {    
     app.get('/image', [
       query('api_key').exists().withMessage('api_key is required'),
       query('api_key').equals(process.env.NASA_API_KEY!).withMessage('api_key is not a valid value'),
