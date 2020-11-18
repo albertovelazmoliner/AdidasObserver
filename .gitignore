@@ -4,6 +4,7 @@ package-lock.json
 package-lock.json
 dist
 private/
+coverage/
 src/config/
 reports
 logs/
