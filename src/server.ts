@@ -2,8 +2,6 @@ import fs from 'fs'
 import https from 'https'
 import app from './app'
 
-const PORT = process.env.PORT
-
 const cert = fs.readFileSync(__dirname + '/config/cert.pem')
 const key = fs.readFileSync(__dirname + '/config/key.pem')
 
@@ -12,4 +10,4 @@ const httpsOptions = {
     key: key
 }
 
-https.createServer(httpsOptions, app).listen(PORT)
+https.createServer(httpsOptions, app).listen(3000, '0.0.0.0')
