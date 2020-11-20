@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.com/albertovelazmoliner/AdidasObserver.svg?branch=master)](https://travis-ci.com/albertovelazmoliner/AdidasObserver)
 
 API Doc is available with the document openapi.yaml
+
 You can view it on: https://editor.swagger.io/
 
 CI is connected with Travis CI
@@ -24,55 +25,59 @@ Install docker and start docker
 Install minikube
 - https://minikube.sigs.k8s.io/docs/start/
 
-Steps:
-
-Create docker image of the nodejs app:
-
-**docker build -t adidas-observer .**⏎
-
-Start minikube
-
-**minikube start**⏎
 
 
-Add adidas-observer image to minikube cache:
+**Steps**:
 
-minikube cache add adidas-observer:latest⏎
+- Create docker image of the nodejs app:
 
-Check adidas-observer:latest has been added to minikube cache:
-minikube cache list⏎
+    **docker build -t adidas-observer .** ⏎
 
-Before deploying the pod it's neccessary to replace the placeholder for both env variables you got from 
-https://developers.google.com/maps/documentation/geocoding/overview
-and
-https://api.nasa.gov/
+- Start minikube
 
-- name: GOOGLE_MAPS_API_KEY
-    value: "<GOOGLE_MAPS_API_KEY VALUE>"
-- name: NASA_API_KEY
-    value: "<NASA_API_KEY VALUE>"
+    **minikube start** ⏎
 
-After replacing values you can continue with the deploy.
+- Add adidas-observer image to minikube cache:
 
-Deploy adidas:observer:latest with a pod
+    **minikube cache add adidas-observer:latest** ⏎
 
-kubectl apply -f pods/adidas-deployment.yaml⏎
+- Check adidas-observer:latest has been added to minikube cache:
 
-deployment.apps/adidas-deployment created
+    **minikube cache list** ⏎
 
-Check pods are ok:
-kubectl get pods⏎
-NAME                                READY   STATUS    RESTARTS   AGE
-adidas-deployment-9976d869d-bh549   1/1     Running   0          16s
-adidas-deployment-9976d869d-zhmt4   1/1     Running   0          16s
+- Before deploying the pod it's neccessary to replace the placeholder for both env variables you got from https://developers.google.com/maps/documentation/geocoding/overview and https://api.nasa.gov/
 
-kubectl expose deployment adidas-deployment --type=LoadBalancer --port=3000⏎
+    - name: GOOGLE_MAPS_API_KEY
+     value: "<GOOGLE_MAPS_API_KEY VALUE>"
+    - name: NASA_API_KEY
+     value: "<NASA_API_KEY VALUE>"
 
-resutl: service/adidas-deployment exposed
+- After replacing values you can continue with the deploy.
 
-minikube tunnel⏎
+- Deploy adidas:observer:latest with a pod
 
-Service is available now
+    **kubectl apply -f pods/adidas-deployment.yaml** ⏎
+
+    _deployment.apps/adidas-deployment created_
+
+- Check pods are ok:
+
+**kubectl get pods** ⏎
+ 
+NAME | READY | STATUS | RESTARTS | AGE
+---- | ----- | ------ | -------- | ---
+adidas-deployment-9976d869d-bh549 | 1/1 | Running | 0 | 16s
+adidas-deployment-9976d869d-zhmt4 | 1/1 | Running | 0 | 16s
+
+- Expose adidas service
+    **kubectl expose deployment adidas-deployment --type=LoadBalancer --port=3000** ⏎
+
+    _service/adidas-deployment exposed_
+
+- Open service
+    **minikube tunnel** ⏎
+
+- Service is available now
 
 service endpoint: 
 https://127.0.0.1:3000/image
