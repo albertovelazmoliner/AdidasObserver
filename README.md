@@ -62,12 +62,12 @@ Install minikube
 
 - Check pods are ok:
 
-**kubectl get pods** ⏎
+   **kubectl get pods** ⏎
  
-NAME | READY | STATUS | RESTARTS | AGE
----- | ----- | ------ | -------- | ---
-adidas-deployment-9976d869d-bh549 | 1/1 | Running | 0 | 16s
-adidas-deployment-9976d869d-zhmt4 | 1/1 | Running | 0 | 16s
+   NAME | READY | STATUS | RESTARTS | AGE
+   ---- | ----- | ------ | -------- | ---
+   _adidas-deployment-9976d869d-bh549_ | _1/1_ | _Running_ | _0_ | _16s_
+   _adidas-deployment-9976d869d-zhmt4_ | _1/1_ | _Running_ | _0_ | _16s_
 
 - Expose adidas service
     **kubectl expose deployment adidas-deployment --type=LoadBalancer --port=3000** ⏎
