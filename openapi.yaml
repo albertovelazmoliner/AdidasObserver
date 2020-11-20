@@ -25,6 +25,22 @@ tags:
 - name: image
   description: Operation about get Earth images
 paths:
+  /api:
+    get:
+      tags:
+      - api status
+      summary: Returns status of the Service
+      description: Returns status of the Service
+      operationId: getApi
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        "404":
+          description: Not found
   /image:
     get:
       tags:
@@ -94,12 +110,26 @@ components:
         imageDate:
           type: string
           format: date
+        formattedAddress:
+          type: string
       example:
         imageUrl: imageUrl
         imageDate: 2000-01-23
         formattedAddress: 'Somewhere in time, 2'
       xml:
         name: ImageData
+    Status:
+      type: object
+      properties:
+        title:
+          type: string
+        status: 
+          type: string
+      example:
+        title: Adidas Observer API",
+        status: success
+      xml:
+        name: Status
   responses:
     UnauthorizedError:
       description: Api Key is missing or invalid
