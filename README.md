@@ -25,7 +25,21 @@ Install docker and start docker
 Install minikube
 - https://minikube.sigs.k8s.io/docs/start/
 
+You need to create a certificate in order to have an https server. Then, you have to put the cert and key files on folder src/config:
 
+src/config/cert.pem
+src/config/key.pem
+
+If you want to run the app on local you need to create an .env file with values for the GOOGLE_MAPS_API_KEY and NASA_API_KEY
+
+------------------------------------------------
+_**.env**_
+
+_GOOGLE_MAPS_API_KEY=<GOOGLE_MAPS_API_KEY VALUE>_
+
+_NASA_API_KEY=<NASA_API_KEY VALUE>_
+
+-------------------------------------------------
 
 **Steps**:
 
